@@ -23,7 +23,7 @@ module.exports = () => {
        // Creates a copy of the index.html file in the dist folder and inserts in script tag to the newly created bundle.js file
        template: './index.html', 
        // Optional parameters
-       title: 'PWA Text Editor'
+       title: 'Jate'
      }),
     
      // Injects our custom service worker

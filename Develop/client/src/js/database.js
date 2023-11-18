@@ -13,48 +13,26 @@ const initdb = async () =>
   });
 
 // TODO: Add logic to a method that accepts some content and adds it to the database
-export const putDb = async (id, content) => {
-  try {
-    console.log('PUT to the database');
-    // Create a connection to the database database and version we want to use.
-    const jateDb = await openDB('jate', 1);
-    // Create a new transaction and specify the database and data privileges.
-    const jx = jateDb.transaction('jate', 'readwrite');
-    // Open up the desired object store.
-    const store = jx.objectStore('jate');
-    // Use the .put() method to update the content
-    const request = store.put({ id: id, todo: content });
-    // Get confirmation of the request.
-    const result = await request;
-    console.log('Data saved to the database', result);
-  } catch(err){
-    console.error('putDb not implemented',err);
-    throw err;
-  }
+// Take updated content and save it to IndexedDB.
+export const putDb = async (content) => {
+  const jateDB = await openDB('jate', 1);
+  const tx = jateDB.transaction('jate', 'readwrite');
+  const store = tx.objectStore('jate');
+  const request = store.put({ id: 1, value: content });
+  const result = await request;
+  console.log('Data successfully saved to database',result);
 };
-  
 
-// TODO: Add logic for a method that gets all the content from the database
+// Get all content from database
 export const getDb = async () => {
-  try {
-    console.log('GET all from the database');
-    // Create a connection to the database database and version we want to use.
-    const jateDb = await openDB('jate', 1);
-    // Create a new transaction and specify the database and data privileges.
-    const jx = jateDb.transaction('jate', 'readonly');
-    // Open up the desired object store.
-    const store = jx.objectStore('jate');
-     // Use the .getAll() method to get all data in the database.
-    const request = store.getAll();
-    // Get confirmation of the request.
-    const result = await request;
-    console.log('result.value', result);
-    return result;
-  } catch (err) {
-    console.error('Error in getDb:', err);
-    throw err;
-  }
+  const jateDB = await openDB('jate', 1);
+  const tx = jateDB.transaction('jate', 'readonly');
+  const store = tx.objectStore('jate');
+  const request = store.get(1);
+  const result = await request;
+  console.log('Data successfully saved to database',result);
+  return result.value;
 };
-
 
 initdb();
+
