@@ -54,8 +54,9 @@ THEN I should have proper build scripts for a webpack application
 - Go to the url of the application (http//:localhost:3001) to begin using it.
 
 ## Usage
-
-
+![screenshot](./Assets/mockup.png)
+Please download from heroku as below link:
+https://hidden-woodland-10962-fbfeed604d1b.herokuapp.com/
 
 ## Technologies
 
